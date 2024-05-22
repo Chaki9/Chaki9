@@ -1,0 +1,46 @@
+import pygame
+import sys
+
+# Initialize pygame
+pygame.init()
+
+# Constants
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+TILE_SIZE = 40
+ROWS = SCREEN_HEIGHT // TILE_SIZE
+COLS = SCREEN_WIDTH // TILE_SIZE
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+BROWN = (139, 69, 19)
+
+# Create the screen
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Minecraft in Python")
+
+# Function to draw the grid
+def draw_grid():
+    for row in range(ROWS):
+        for col in range(COLS):
+            if row == ROWS - 1:
+                color = BROWN
+            elif row == ROWS - 2:
+                color = GREEN
+            else:
+                color = WHITE
+
+            pygame.draw.rect(screen, color, (col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE))
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    
+    screen.fill(WHITE)
+    draw_grid()
+    pygame.display.flip()
+
+pygame.quit()
+sys.exit()
